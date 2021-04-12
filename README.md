@@ -1,28 +1,53 @@
-# BETest
+# Getting Started
+## Description
+This API takes any input as source for available it can read data and 
+populate that data as view.
+Api is designed using spring-boot 
 
-## Why?
-
-We are interested in your skills as a developer. As part of our assessment, we want to see your code.
-
-## Instructions
-
-In this repo, you'll find two files, Workbook2.csv and Workbook2.prn. These files need to be converted to a HTML format by the code you deliver. Please consider your work as a proof of concept for a system that can keep track of credit limits from several sources.
-
-This repository is created specially for you, so you can push anything you like. Please update this README to provide instructions, notes and/or comments for us.
-
-## The Constraints
-
-Please complete the test within 5 business days. Use either Java, Scala or Kotlin. Use any libs / tools you like.
-
-## Questions?
-
-If you have any questions please send an email to DL-eCG-NL-assessment@ebay.com.
-
-## Finished?
-
-Please send an email to DL-eCG-NL-assessment@ebay.com let us know you're done.
-
-Good Luck!
+## Points to Set up code in IDE
+1. lombok dependency is used , so if lombok plugin is not installed in your IDE then please install it.
+2. Code repository should be placed at a location where you have access to read file. i.e, Workbook.csv
+3. jdk1.8 is used, make sure JAVA_HOME is in your machine
+4. Import this project as gradle project
 
 
-Copyright (C) 2001 - 2021 by Marktplaats BV an Ebay company. All rights reserved.
+## How to build the code
+Go to project root directory and run
+```
+/BeTest_alok05>gradlew clean build
+```
+
+## How to run the application
+1. Using the jar
+```
+/BeTest_alok05/build/libs> java -jar BeTest_alok05-0.0.1-SNAPSHOT.jar
+```
+2. Using bootRun
+```
+/BeTest_alok05>gradlew bootRun
+```
+
+After successful run test using this http://localhost:9091/records in browser
+
+### Reference Documentation
+For further reference, please consider the following sections:
+
+* [Official Gradle documentation](https://docs.gradle.org)
+* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.4/gradle-plugin/reference/html/)
+* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.4/gradle-plugin/reference/html/#build-image)
+* [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.4/reference/htmlsingle/#boot-features-developing-web-applications)
+* [Thymeleaf](https://docs.spring.io/spring-boot/docs/2.4.4/reference/htmlsingle/#boot-features-spring-mvc-template-engines)
+
+### Guides
+The following guides illustrate how to use some features concretely:
+
+* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
+* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
+* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+* [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
+
+### Additional Links
+These additional references should also help you:
+
+* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+

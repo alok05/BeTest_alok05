@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+    <Properties>
+        <property name="LOG_PATH" value="logs"/>
+        <Property name="LOG_PATTERN">%d{DATE} %5p --- [%t] : %m%n</Property>
+        <Property name="LOG_CONSOLE_PATTERN">%clr{%d{DATE}}{faint} %clr{%5p}{magenta} %clr{---}{faint} %clr{[%t]} %clr{%c}{cyan} %clr{:}{faint} %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_CONSOLE_PATTERN}" />
+        </Console>
+
+        <RollingFile name="App-Appender"
+                     fileName="${sys:LOG_PATH}/app.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2" />
+        </RollingFile>
+
+        <RollingFile name="Performance-Appender"
+                     fileName="${sys:LOG_PATH}/performance.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2" />
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+
+        <Logger name="com.example.creditlimit" level="info">
+            <AppenderRef ref="App-Appender" />
+        </Logger>
+
+        <Logger name="PerfLog" level="info" additivity="false">
+            <AppenderRef ref="Performance-Appender" />
+        </Logger>
+
+        <Logger name="Console" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="App-Appender" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/bootstrap.min.css"/>
+    <script src="/ajax.min.js"></script>
+    <script src="/getCredit.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-info">Records With Credit Limit</h2>
+    <form id="credit" method="get">
+        <div>
+            <span>
+                <label>Source :</label>
+                <select id="dropdown">
+                    <option value="Nothing Selected">Nothing Selected</option>
+                    <option th:each="source :${sourceList}"
+                        th:value="${source}"
+                        th:text="${source}">
+                    </option>
+                </select>
+                <label id="validationMessage"></label>
+            </span>
+        </div>
+        <div>
+            <input type="submit" value="Get Records">
+        </div>
+    </form>
+    <div>
+        <h5 class="text-success" id="tableHeading"></h5>
+        <table class="table table-bordered table-hover" id="usersList">
+        </table>
+    </div>
+</div>
+</body>
+</html>
