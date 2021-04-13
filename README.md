@@ -1,6 +1,6 @@
 # Getting Started
 ## Description
-This API takes any input as source for available it can read data and 
+This API takes any input as source for available data sources it can read data and 
 populate that data as view.
 Api is designed using spring-boot 
 
