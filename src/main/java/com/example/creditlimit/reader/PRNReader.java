@@ -4,19 +4,20 @@ import com.example.creditlimit.model.PersonInfo;
 import com.example.creditlimit.model.SourceEnum;
 import com.example.creditlimit.utility.CommonUtility;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class PRNReader implements SourceReader {
 
-    private static final String PRN_FILE = "Workbook2.prn";
+    private static final String PRN_FILE = "classpath:Workbook2.prn";
 
     private final CommonUtility commonUtility;
 
@@ -28,18 +29,18 @@ public class PRNReader implements SourceReader {
     public List<PersonInfo> getRecords() throws IOException {
         List<PersonInfo> personInfoOutputList = new ArrayList<>();
 
-        List<String> personInfoInputList = Files.readAllLines(new File(commonUtility.getResource(PRN_FILE)).toPath(),
-                Charset.forName("ISO_8859_1"));
+        InputStream inputStream = commonUtility.getResource(PRN_FILE);
+        String dataAsString = StreamUtils.copyToString(inputStream, Charset.forName("ISO_8859_1"));
 
-        List<String> personInfoInputData = personInfoInputList
-                .stream()
+        String[] personInfoInputData = dataAsString.split("\n");
+        String firstLineString = personInfoInputData[0];
+
+        List<String> personInfoInputList = Arrays.asList(personInfoInputData).stream()
                 .skip(1)
                 .collect(Collectors.toList());
 
-        String firstLineString = personInfoInputList.get(0);
         String[] array = new String[7];
-
-        for (String str : personInfoInputData) {
+        for (String str : personInfoInputList) {
             array[0] = str.substring(firstLineString.indexOf("Name"), firstLineString.indexOf("Address")).trim();
             array[1] = "";
             array[2] = str.substring(firstLineString.indexOf("Address"), firstLineString.indexOf("Postcode")).trim();

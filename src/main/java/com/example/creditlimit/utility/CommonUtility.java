@@ -4,22 +4,29 @@ import com.example.creditlimit.exception.InvalidSourceException;
 import com.example.creditlimit.model.PersonInfo;
 import com.example.creditlimit.model.ServiceResponse;
 import com.example.creditlimit.model.SourceEnum;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Objects;
 
 @Component
 public class CommonUtility {
 
-    public String getResource(String fileName) throws FileNotFoundException {
-        URL resource = getClass().getClassLoader().getResource(fileName);
-        Objects.requireNonNull(resource);
-        return resource.getFile();
+    private final ResourceLoader resourceLoader;
+
+    public CommonUtility(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    public InputStream getResource(String fileName) throws IOException {
+
+        Resource resource = resourceLoader.getResource(fileName);
+        return resource.getInputStream();
     }
 
     public PersonInfo buildPersonInfo(String[] array, String source) {

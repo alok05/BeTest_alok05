@@ -4,12 +4,13 @@ import com.example.creditlimit.model.PersonInfo;
 import com.example.creditlimit.model.SourceEnum;
 import com.example.creditlimit.utility.CommonUtility;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class CSVReader implements SourceReader {
 
     private static final String DELIMITER = ",";
 
-    private static final String CSV_FILE = "Workbook2.csv";
+    private static final String CSV_FILE = "classpath:Workbook2.csv";
 
     private final CommonUtility commonUtility;
 
@@ -30,8 +31,10 @@ public class CSVReader implements SourceReader {
     public List<PersonInfo> getRecords() throws IOException {
         List<PersonInfo> personInfoOutputList = new ArrayList<PersonInfo>();
 
-        List<String[]> personInfoInputList = Files
-                .readAllLines(new File(commonUtility.getResource(CSV_FILE)).toPath(), Charset.forName("ISO_8859_1"))
+        InputStream inputStream = commonUtility.getResource(CSV_FILE);
+        String dataAsString = StreamUtils.copyToString(inputStream, Charset.forName("ISO_8859_1"));
+
+        List<String[]> personInfoInputList = Arrays.asList(dataAsString.split("\n"))
                 .stream()
                 .skip(1)
                 .map(s -> s.split(DELIMITER))

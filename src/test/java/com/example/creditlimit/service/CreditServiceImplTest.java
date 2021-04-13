@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -39,6 +41,9 @@ public class CreditServiceImplTest {
     @InjectMocks
     private PRNReader prnReader;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     private List<PersonInfo> personInfoList;
 
     @Before
@@ -48,6 +53,7 @@ public class CreditServiceImplTest {
         ReflectionTestUtils.setField(sourceFactory, "csvReader", csvReader);
         ReflectionTestUtils.setField(csvReader, "commonUtility", commonUtility);
         ReflectionTestUtils.setField(prnReader, "commonUtility", commonUtility);
+        ReflectionTestUtils.setField(commonUtility, "resourceLoader", resourceLoader);
     }
 
     @Test

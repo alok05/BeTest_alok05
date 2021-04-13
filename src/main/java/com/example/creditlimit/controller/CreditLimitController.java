@@ -5,7 +5,6 @@ import com.example.creditlimit.logging.annotations.Profile;
 import com.example.creditlimit.model.PersonInfo;
 import com.example.creditlimit.service.CreditLimitService;
 import com.example.creditlimit.utility.CommonUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,6 @@ public class CreditLimitController {
 
     private final CommonUtility commonUtility;
 
-    @Autowired
     public CreditLimitController(CreditLimitService creditLimitService, CommonUtility commonUtility) {
         this.creditLimitService = creditLimitService;
         this.commonUtility = commonUtility;
