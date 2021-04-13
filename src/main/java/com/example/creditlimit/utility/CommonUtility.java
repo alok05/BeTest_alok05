@@ -37,11 +37,11 @@ public class CommonUtility {
 
         return PersonInfo.builder()
                 .name(name)
-                .address(array[2])
-                .postCode(array[3])
-                .phoneNumber(array[4])
-                .creditLimit(array[5])
-                .birthDay(array[6])
+                .address(array[2].trim())
+                .postCode(array[3].trim())
+                .phoneNumber(array[4].trim())
+                .creditLimit(array[5].trim())
+                .birthDay(array[6].trim())
                 .build();
     }
 
